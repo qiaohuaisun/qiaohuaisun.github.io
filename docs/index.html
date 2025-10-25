@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>qiaohuai的屋舍</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="一个CS新生的编程成长记录存放处 - 记录学习过程、踩坑经验和成长轨迹">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    :root {
+      --theme-color: #42b983;
+    }
+
+    /* 封面页样式 */
+    section.cover {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    }
+
+    section.cover h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0.5rem 0 1rem;
+    }
+
+    section.cover h1 img {
+      max-width: 100px;
+      margin-bottom: 1rem;
+    }
+
+    section.cover blockquote {
+      border-left: none;
+      padding: 0;
+      margin: 1rem 0 2rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    section.cover h2 {
+      font-size: 2rem;
+      color: #ffd700;
+      margin: 0.5rem 0;
+      font-weight: 400;
+      font-family: "KaiTi", "STKaiti", serif;
+      line-height: 1.8;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    section.cover p a {
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      padding: 0.8rem 2rem;
+      margin: 0.5rem;
+      border-radius: 2rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    section.cover p a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    section.cover ul {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    section.cover ul li {
+      display: inline-block;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    /* 响应式设计 */
+    @media screen and (max-width: 768px) {
+      section.cover h1 {
+        font-size: 2.5rem;
+      }
+
+      section.cover h2 {
+        font-size: 1.5rem;
+      }
+
+      section.cover blockquote {
+        font-size: 1rem;
+      }
+    }
+
+    /* Mermaid 图表样式 */
+    .mermaid {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* 进度跟踪复选框样式 */
+    .progress-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+    }
+
+    .progress-item:hover {
+      background: #e9ecef;
+      transform: translateX(5px);
+    }
+
+    .progress-item input[type="checkbox"] {
+      margin-right: 1rem;
+      margin-top: 0.3rem;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--theme-color);
+    }
+
+    .progress-item.completed {
+      background: #d4edda;
+      opacity: 0.8;
+    }
+
+    .progress-item.completed label {
+      text-decoration: line-through;
+      color: #6c757d;
+    }
+
+    /* 进度条样式 */
+    .progress-bar-container {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .progress-bar-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar-wrapper {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      height: 30px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #42b983 0%, #35a372 100%);
+      border-radius: 10px;
+      transition: width 0.6s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 卡片式布局增强 */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .info-card {
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--theme-color);
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-card h4 {
+      color: var(--theme-color);
+      margin-top: 0;
+    }
+
+    /* 时间线样式 */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--theme-color) 0%, #764ba2 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--theme-color);
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px var(--theme-color);
+    }
+
+    /* 响应式图表 */
+    @media screen and (max-width: 768px) {
+      .mermaid {
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        padding-left: 1.5rem;
+      }
+    }
+
+    /* 内容布局优化 */
+    /* 提示框样式 */
+    .tip-box {
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid;
+      background: #f8f9fa;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .tip-box.info {
+      border-left-color: #42b983;
+      background: linear-gradient(135deg, rgba(66, 185, 131, 0.1) 0%, rgba(66, 185, 131, 0.05) 100%);
+    }
+
+    .tip-box.warning {
+      border-left-color: #ff9800;
+      background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 152, 0, 0.05) 100%);
+    }
+
+    .tip-box.success {
+      border-left-color: #4caf50;
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+    }
+
+    .tip-box.tip {
+      border-left-color: #2196f3;
+      background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.05) 100%);
+    }
+
+    /* 徽章和标签 */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 12px;
+      margin: 0 0.3rem 0.3rem 0;
+      white-space: nowrap;
+    }
+
+    .badge.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .badge.success {
+      background: linear-gradient(135deg, #42b983 0%, #35a372 100%);
+      color: white;
+    }
+
+    .badge.info {
+      background: linear-gradient(135deg, #5470c6 0%, #3d5fa8 100%);
+      color: white;
+    }
+
+    .badge.warning {
+      background: linear-gradient(135deg, #fac858 0%, #f5b93e 100%);
+      color: #333;
+    }
+
+    /* 表格优化 */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    table thead {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    table thead th {
+      padding: 1rem;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+
+    table tbody tr:hover {
+      background: #e9ecef;
+      transform: scale(1.01);
+    }
+
+    table tbody td {
+      padding: 1rem;
+      border-top: 1px solid #dee2e6;
+    }
+
+    /* 代码块增强 */
+    pre {
+      background: #2d2d2d;
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    pre code {
+      color: #f8f8f2;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* 引用块优化 */
+    blockquote {
+      border-left: 4px solid var(--theme-color);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      background: linear-gradient(135deg, rgba(66, 185, 131, 0.1) 0%, rgba(66, 185, 131, 0.05) 100%);
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #495057;
+    }
+
+    blockquote p {
+      margin: 0.5rem 0;
+    }
+
+    /* 列表优化 */
+    article ul,
+    article ol {
+      padding-left: 2rem;
+      margin: 1rem 0;
+    }
+
+    article ul li,
+    article ol li {
+      margin: 0.5rem 0;
+      line-height: 1.8;
+    }
+
+    article ul li::marker {
+      color: var(--theme-color);
+    }
+
+    /* 链接优化 */
+    article a {
+      color: var(--theme-color);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    article a:hover {
+      border-bottom-color: var(--theme-color);
+      color: #35a372;
+    }
+
+    /* 标题优化 */
+    article h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--theme-color);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    article h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      padding-left: 1rem;
+      border-left: 5px solid var(--theme-color);
+      color: #333;
+    }
+
+    article h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 1.5rem 0 1rem;
+      color: #495057;
+    }
+
+    article h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1rem 0 0.75rem;
+      color: #6c757d;
+    }
+
+    /* 分隔线优化 */
+    hr {
+      border: none;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--theme-color) 50%, transparent 100%);
+      margin: 3rem 0;
+    }
+
+    /* 内容容器优化 */
+    #main {
+      padding: 2rem;
+    }
+
+    article {
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* 图片优化 */
+    article img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin: 1.5rem 0;
+    }
+
+    /* 详情折叠优化 */
+    details {
+      margin: 1.5rem 0;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1rem;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    details[open] {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--theme-color);
+      font-size: 1.1rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    details summary:hover {
+      background: rgba(66, 185, 131, 0.1);
+    }
+
+    /* 搜索框优化样式 */
+    .search {
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 1rem;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: 2px solid #e9ecef;
+      border-radius: 24px;
+      outline: none;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .search input:focus {
+      border-color: var(--theme-color);
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(66, 185, 131, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .search input::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+
+    /* 搜索结果样式优化 */
+    .matching-post {
+      border-left: 4px solid var(--theme-color);
+      padding: 0.8rem 1rem;
+      margin: 0.5rem 0;
+      background: #f8f9fa;
+      border-radius: 0 8px 8px 0;
+      transition: all 0.3s ease;
+    }
+
+    .matching-post:hover {
+      background: #e9ecef;
+      transform: translateX(5px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .matching-post h2 {
+      margin: 0 0 0.5rem 0;
+      color: var(--theme-color);
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      padding: 0;
+    }
+
+    .matching-post p {
+      margin: 0.3rem 0;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .search .results-panel {
+      max-height: 70vh;
+      overflow-y: auto;
+      padding: 1rem 0;
+    }
+
+    .search .results-panel.show {
+      display: block;
+    }
+
+    /* 搜索无结果提示 */
+    .search .no-data {
+      text-align: center;
+      padding: 2rem;
+      color: #999;
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    /* 搜索快捷键提示 */
+    .search-shortcut {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #fff;
+      pointer-events: none;
+    }
+
+    .search .input-wrap {
+      position: relative;
+    }
+
+    /* 响应式优化 */
+    @media screen and (max-width: 768px) {
+      article h1 {
+        font-size: 2rem;
+      }
+
+      article h2 {
+        font-size: 1.5rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      table thead th,
+      table tbody td {
+        padding: 0.75rem;
+      }
+
+      #main {
+        padding: 1rem;
+      }
+
+      .search input {
+        font-size: 0.95rem;
+      }
+
+      .search-shortcut {
+        display: none;
+      }
+    }
+
+    /* 回到顶部按钮样式 */
+    #back-to-top {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #back-to-top:hover {
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    #back-to-top:active {
+      transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media screen and (max-width: 768px) {
+      #back-to-top {
+        right: 20px;
+        bottom: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">加载中...</div>
+
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" title="回到顶部">↑</button>
+
+  <script>
+    window.$docsify = {
+      name: 'qiaohuai的学习日记',
+      repo: 'https://github.com/qiaohuaisun/qiaohuaisun.github.io',
+
+      coverpage: true,
+      onlyCover: false,
+      loadNavbar: true,
+
+      search: {
+        maxAge: 86400000, // 缓存时间
+        paths: 'auto', // 自动搜索所有路径
+        placeholder: '🔍 搜索学习笔记... (按 / 或 Ctrl+K 快速搜索)',
+        noData: '😢 没有找到相关内容，试试其他关键词？',
+        depth: 6, // 搜索深度
+        hideOtherSidebarContent: false,
+
+        // 命名空间，避免多个docsify站点冲突
+        namespace: 'qiaohuai-learning-diary',
+
+        // 自定义搜索路径，优先搜索重要内容
+        pathNamespaces: ['/编程路线图', '/工具与环境', '/经验分享'],
+      },
+
+      copyCode: {
+        buttonText: '复制',
+        errorText: '错误',
+        successText: '已复制'
+      },
+
+      markdown: {
+        smartypants: true
+      },
+
+      plugins: [
+        function (hook, vm) {
+          hook.beforeEach(function (html) {
+            return html;
+          });
+
+          // 初始化 AOS 动画
+          hook.doneEach(function () {
+            // 初始化 AOS 动画
+            if (typeof AOS !== 'undefined') {
+              AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+              });
+            }
+
+            // 初始化进度跟踪
+            initProgressTracking();
+
+            // 初始化搜索快捷键
+            initSearchShortcuts();
+          });
+        }
+      ]
+    }
+
+    // 进度跟踪功能
+    function initProgressTracking() {
+      const checkboxes = document.querySelectorAll('.progress-item input[type="checkbox"]');
+
+      checkboxes.forEach(function (checkbox) {
+        const item = checkbox.closest('.progress-item');
+        const itemId = checkbox.id || 'progress-' + Math.random().toString(36).substr(2, 9);
+        checkbox.id = itemId;
+
+        // 从 localStorage 读取状态
+        const saved = localStorage.getItem(itemId);
+        if (saved === 'true') {
+          checkbox.checked = true;
+          item.classList.add('completed');
+        }
+
+        // 监听变化
+        checkbox.addEventListener('change', function () {
+          localStorage.setItem(itemId, checkbox.checked);
+          if (checkbox.checked) {
+            item.classList.add('completed');
+          } else {
+            item.classList.remove('completed');
+          }
+
+          // 更新进度条
+          updateProgressBar();
+        });
+      });
+
+      // 初始化进度条
+      updateProgressBar();
+    }
+
+    function updateProgressBar() {
+      const progressBars = document.querySelectorAll('.progress-bar-wrapper');
+
+      progressBars.forEach(function (bar) {
+        const container = bar.closest('.progress-section');
+        if (!container) return;
+
+        const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+        const checked = container.querySelectorAll('input[type="checkbox"]:checked');
+
+        const total = checkboxes.length;
+        const completed = checked.length;
+        const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+        const fill = bar.querySelector('.progress-bar-fill');
+        if (fill) {
+          fill.style.width = percentage + '%';
+          fill.textContent = percentage + '%';
+        }
+      });
+    }
+
+    // 搜索快捷键和智能建议功能
+    function initSearchShortcuts() {
+      const searchInput = document.querySelector('.search input[type="search"]');
+      if (!searchInput) return;
+
+      // 快捷键：按 / 或 Ctrl+K 聚焦搜索框
+      document.addEventListener('keydown', function (e) {
+        // 按 / 键（不在输入框中）
+        if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        }
+
+        // 按 Ctrl+K 或 Cmd+K
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        }
+
+        // 按 ESC 取消搜索
+        if (e.key === 'Escape' && document.activeElement === searchInput) {
+          searchInput.blur();
+          searchInput.value = '';
+        }
+      });
+
+      // 搜索建议和智能提示
+      const searchSuggestions = {
+        '编程': ['C++学习路线', 'Python入门', '编程路线图'],
+        'c++': ['C/C++路线图', 'C++语法', 'STL容器'],
+        'python': ['Python路线图', 'Python语法', 'Python项目'],
+        'git': ['Git使用指南', 'GitHub入门', '版本控制'],
+        '工具': ['VS安装', 'PyCharm配置', '学习工具箱'],
+        '竞赛': ['编程竞赛', '竞赛经验', 'LeetCode'],
+        '问题': ['FAQ', '常见问题', '踩坑记录'],
+      };
+
+      // 智能搜索提示（当输入关键词时显示相关建议）
+      let searchTimeout;
+      searchInput.addEventListener('input', function () {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function () {
+          const query = searchInput.value.toLowerCase().trim();
+
+          // 检查是否匹配搜索建议
+          for (const [keyword, suggestions] of Object.entries(searchSuggestions)) {
+            if (query.includes(keyword)) {
+              // 在控制台输出建议（可以后续改为显示在UI中）
+              console.log('💡 搜索建议:', suggestions.join(', '));
+              break;
+            }
+          }
+        }, 300);
+      });
+
+      // 搜索结果优化：根据关键词权重排序
+      const priorityKeywords = {
+        '路线图': 3,
+        '入门': 3,
+        '指南': 2,
+        '工具': 2,
+        '竞赛': 2,
+        'FAQ': 2,
+      };
+
+      // 记录搜索历史（存储在 localStorage）
+      searchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter' && searchInput.value.trim()) {
+          const query = searchInput.value.trim();
+          saveSearchHistory(query);
+        }
+      });
+    }
+
+    // 保存搜索历史
+    function saveSearchHistory(query) {
+      const historyKey = 'qiaohuai-search-history';
+      let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+
+      // 避免重复
+      history = history.filter(item => item !== query);
+
+      // 添加到开头
+      history.unshift(query);
+
+      // 只保留最近10条
+      history = history.slice(0, 10);
+
+      localStorage.setItem(historyKey, JSON.stringify(history));
+    }
+
+    // 获取搜索历史
+    function getSearchHistory() {
+      const historyKey = 'qiaohuai-search-history';
+      return JSON.parse(localStorage.getItem(historyKey) || '[]');
+    }
+  </script>
+
+  <!-- 回到顶部：行为脚本 -->
+  <script>
+    (function () {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+
+      var threshold = 200; // 显示按钮的滚动阈值（像素）
+
+      function toggle() {
+        var y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (y > threshold) {
+          btn.classList.add('show');
+        } else {
+          btn.classList.remove('show');
+        }
+      }
+
+      function scrollToTop() {
+        var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) {
+          window.scrollTo(0, 0);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      // 事件绑定
+      window.addEventListener('scroll', toggle, { passive: true });
+      window.addEventListener('hashchange', toggle);
+      btn.addEventListener('click', scrollToTop);
+
+      // 初始化状态
+      toggle();
+
+      // Docsify 路由切换后刷新按钮状态
+      window.$docsify = window.$docsify || {};
+      var prevPlugins = window.$docsify.plugins || [];
+      function backTopPlugin(hook) {
+        hook.doneEach(function () {
+          setTimeout(toggle, 0);
+        });
+      }
+      window.$docsify.plugins = [].concat(prevPlugins, backTopPlugin);
+    })();
+  </script>
+
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+
+  <!-- 全文搜索插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <!-- Emoji 插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+
+  <!-- 代码复制插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+
+  <!-- 代码高亮 -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-markup.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+
+  <!-- Mermaid 图表插件 -->
+  <script type="module">
+    import mermaid from "//cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      themeVariables: {
+        primaryColor: '#42b983',
+        primaryTextColor: '#fff',
+        primaryBorderColor: '#42b983',
+        lineColor: '#5470c6',
+        secondaryColor: '#91cc75',
+        tertiaryColor: '#fac858'
+      }
+    });
+    window.mermaid = mermaid;
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-mermaid@latest/dist/docsify-mermaid.js"></script>
+
+  <!-- AOS 动画库 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+  <script src="//cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+</body>
+
+</html>
